@@ -8,7 +8,7 @@ const CONFIG = {
     currencies: ['RUB', 'USD', 'KZT', 'JPY', 'KINDER'],
     baseCurrency: 'USD',
     updateInterval: 5 * 60 * 1000, // 5 minutes
-    apiUrl: 'https://api.frankfurter.app/latest',
+    apiUrl: 'https://open.er-api.com/v6/latest/USD',
     kinderPriceRUB: 100 // 1 Kinder Bueno = 100 RUB
 };
 
@@ -57,7 +57,7 @@ async function fetchRates() {
     
     try {
         // Fetch rates with USD as base
-        const response = await fetch(`${CONFIG.apiUrl}?from=USD`);
+        const response = await fetch(CONFIG.apiUrl);
         
         if (!response.ok) {
             throw new Error('API request failed');
@@ -65,10 +65,16 @@ async function fetchRates() {
         
         const data = await response.json();
         
+        if (data.result !== 'success') {
+            throw new Error('API returned error');
+        }
+        
         // Store rates relative to USD
         exchangeRates = {
             USD: 1,
-            ...data.rates
+            RUB: data.rates.RUB,
+            KZT: data.rates.KZT,
+            JPY: data.rates.JPY
         };
         
         // Add KINDER rate (based on RUB price)
@@ -95,10 +101,10 @@ async function fetchRates() {
             // Fallback rates (approximate)
             exchangeRates = {
                 USD: 1,
-                RUB: 92.5,
-                KZT: 450,
-                JPY: 149,
-                KINDER: 0.925 // 92.5 / 100
+                RUB: 76,
+                KZT: 503,
+                JPY: 153,
+                KINDER: 0.76 // 76 / 100
             };
             updateTimeEl.textContent = 'Офлайн режим';
         }
