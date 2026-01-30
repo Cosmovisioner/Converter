@@ -54,10 +54,19 @@ async function fetchRates() {
     
     isLoading = true;
     setLoadingState(true);
+    updateTimeEl.textContent = 'Загрузка курса...';
     
     try {
+        // Create abort controller for timeout
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 sec timeout
+        
         // Fetch rates with USD as base
-        const response = await fetch(CONFIG.apiUrl);
+        const response = await fetch(CONFIG.apiUrl, {
+            signal: controller.signal
+        });
+        
+        clearTimeout(timeoutId);
         
         if (!response.ok) {
             throw new Error('API request failed');
@@ -94,19 +103,28 @@ async function fetchRates() {
         
         // Try to load from localStorage
         const savedRates = localStorage.getItem('exchangeRates');
+        const savedTime = localStorage.getItem('lastUpdate');
+        
         if (savedRates) {
             exchangeRates = JSON.parse(savedRates);
-            updateTimeEl.textContent = 'Используется кэш';
+            if (savedTime) {
+                const date = new Date(savedTime);
+                const hours = date.getHours().toString().padStart(2, '0');
+                const minutes = date.getMinutes().toString().padStart(2, '0');
+                updateTimeEl.textContent = `Кэш от ${hours}:${minutes}`;
+            } else {
+                updateTimeEl.textContent = 'Используется кэш';
+            }
         } else {
             // Fallback rates (approximate)
             exchangeRates = {
                 USD: 1,
-                RUB: 76,
-                KZT: 503,
-                JPY: 153,
-                KINDER: 0.76 // 76 / 100
+                RUB: 100,
+                KZT: 500,
+                JPY: 155,
+                KINDER: 1 // 100 / 100
             };
-            updateTimeEl.textContent = 'Офлайн режим';
+            updateTimeEl.textContent = 'Курс примерный';
         }
     } finally {
         isLoading = false;
