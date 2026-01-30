@@ -5,10 +5,11 @@
 
 // Configuration
 const CONFIG = {
-    currencies: ['RUB', 'USD', 'KZT', 'JPY'],
+    currencies: ['RUB', 'USD', 'KZT', 'JPY', 'KINDER'],
     baseCurrency: 'USD',
     updateInterval: 5 * 60 * 1000, // 5 minutes
-    apiUrl: 'https://api.frankfurter.app/latest'
+    apiUrl: 'https://api.frankfurter.app/latest',
+    kinderPriceRUB: 100 // 1 Kinder Bueno = 100 RUB
 };
 
 // State
@@ -70,6 +71,12 @@ async function fetchRates() {
             ...data.rates
         };
         
+        // Add KINDER rate (based on RUB price)
+        // 1 KINDER = 100 RUB, so KINDER rate = RUB rate / 100
+        if (exchangeRates.RUB) {
+            exchangeRates.KINDER = exchangeRates.RUB / CONFIG.kinderPriceRUB;
+        }
+        
         lastUpdate = new Date();
         updateTimeDisplay();
         saveRatesToLocal();
@@ -90,7 +97,8 @@ async function fetchRates() {
                 USD: 1,
                 RUB: 92.5,
                 KZT: 450,
-                JPY: 149
+                JPY: 149,
+                KINDER: 0.925 // 92.5 / 100
             };
             updateTimeEl.textContent = 'Офлайн режим';
         }
@@ -170,6 +178,11 @@ function formatNumber(number, currency) {
         }
     }
     
+    // KINDER - show 2 decimals (can be fractional chocolates!)
+    if (currency === 'KINDER') {
+        return number.toFixed(2);
+    }
+    
     // For other currencies, use 2 decimal places
     if (number >= 0.01) {
         return number.toFixed(2);
@@ -221,7 +234,7 @@ function setupLuckyButton() {
     luckyBtn.addEventListener('click', generateRandomAmount);
 }
 
-// Generate random amount in random currency
+// Generate random amount and show all conversions
 function generateRandomAmount() {
     // Add click animation
     luckyBtn.style.transform = 'scale(0.95)';
@@ -229,33 +242,18 @@ function generateRandomAmount() {
         luckyBtn.style.transform = '';
     }, 100);
     
-    // Pick random currency
-    const randomCurrency = CONFIG.currencies[Math.floor(Math.random() * CONFIG.currencies.length)];
+    // Generate random USD amount (base for conversion)
+    const randomUSD = Math.floor(Math.random() * 1000) + 1; // 1 - 1001 dollars
     
-    // Generate random amount based on currency
-    let randomAmount;
-    switch (randomCurrency) {
-        case 'JPY':
-            randomAmount = Math.floor(Math.random() * 100000) + 100; // 100 - 100,100 yen
-            break;
-        case 'KZT':
-            randomAmount = Math.floor(Math.random() * 500000) + 1000; // 1,000 - 501,000 tenge
-            break;
-        case 'RUB':
-            randomAmount = Math.floor(Math.random() * 100000) + 100; // 100 - 100,100 rubles
-            break;
-        case 'USD':
-        default:
-            randomAmount = Math.floor(Math.random() * 1000) + 1; // 1 - 1,001 dollars
-            break;
-    }
+    // Fill ALL fields with converted values
+    CONFIG.currencies.forEach(currency => {
+        const convertedAmount = randomUSD * exchangeRates[currency];
+        inputs[currency].value = formatNumber(convertedAmount, currency);
+        flashInput(currency);
+    });
     
-    // Set value and trigger conversion
-    inputs[randomCurrency].value = randomAmount;
-    handleInput(randomCurrency, randomAmount);
-    
-    // Highlight the source
-    inputs[randomCurrency].focus();
+    // Save values
+    saveCurrentValues();
 }
 
 // Utility: Debounce function

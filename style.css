@@ -47,76 +47,6 @@ body {
     position: relative;
 }
 
-/* Background Decorations */
-.bg-decoration {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    overflow: hidden;
-    z-index: 0;
-}
-
-/* Torii Gate Silhouette */
-.torii {
-    position: absolute;
-    bottom: 10%;
-    left: 5%;
-    width: 120px;
-    height: 100px;
-    opacity: 0.15;
-}
-
-.torii::before {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 10px;
-    width: 15px;
-    height: 80px;
-    background: var(--neon-purple);
-    box-shadow: 85px 0 0 var(--neon-purple);
-}
-
-.torii::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 120px;
-    height: 12px;
-    background: var(--neon-purple);
-    border-radius: 2px;
-    box-shadow: 0 20px 0 var(--neon-pink);
-}
-
-/* Mount Fuji Silhouette */
-.fuji {
-    position: absolute;
-    bottom: 5%;
-    right: 10%;
-    width: 0;
-    height: 0;
-    border-left: 80px solid transparent;
-    border-right: 80px solid transparent;
-    border-bottom: 100px solid var(--neon-purple);
-    opacity: 0.1;
-}
-
-.fuji::before {
-    content: '';
-    position: absolute;
-    top: 50px;
-    left: -40px;
-    width: 0;
-    height: 0;
-    border-left: 40px solid transparent;
-    border-right: 40px solid transparent;
-    border-bottom: 50px solid var(--neon-white);
-    opacity: 0.3;
-}
 
 /* Main Card */
 .converter-card {
@@ -151,7 +81,7 @@ body {
     font-size: 0.9rem;
     color: var(--neon-blue);
     letter-spacing: 8px;
-    text-shadow: 0 0 10px var(--neon-blue);
+    text-shadow: 0 0 5px rgba(5, 217, 232, 0.5);
 }
 
 .title-main {
@@ -170,21 +100,12 @@ body {
     font-family: 'Dela Gothic One', cursive;
     font-size: 1.5rem;
     color: var(--neon-pink);
-    text-shadow: 
-        0 0 10px var(--neon-pink),
-        0 0 20px var(--neon-pink),
-        0 0 40px var(--neon-pink);
-    animation: symbolGlow 2s ease-in-out infinite alternate;
+    text-shadow: 0 0 8px rgba(255, 42, 109, 0.6);
 }
 
 @keyframes titlePulse {
-    0%, 100% { filter: drop-shadow(0 0 20px rgba(255, 42, 109, 0.5)); }
-    50% { filter: drop-shadow(0 0 30px rgba(255, 42, 109, 0.8)); }
-}
-
-@keyframes symbolGlow {
-    0% { text-shadow: 0 0 10px var(--neon-pink), 0 0 20px var(--neon-pink); }
-    100% { text-shadow: 0 0 20px var(--neon-pink), 0 0 40px var(--neon-pink), 0 0 60px var(--neon-pink); }
+    0%, 100% { filter: drop-shadow(0 0 10px rgba(255, 42, 109, 0.3)); }
+    50% { filter: drop-shadow(0 0 15px rgba(255, 42, 109, 0.5)); }
 }
 
 .subtitle {
@@ -409,6 +330,24 @@ body {
 
 .currency-row.flash {
     animation: successFlash 0.5s ease;
+}
+
+/* Kinder Bueno special row */
+.kinder-row {
+    border: 1px dashed rgba(157, 78, 221, 0.4);
+    background: rgba(157, 78, 221, 0.1);
+}
+
+.kinder-row .currency-code {
+    background: linear-gradient(90deg, #8B4513, #D2691E);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.kinder-row:hover {
+    border-color: #D2691E;
+    box-shadow: 0 0 15px rgba(210, 105, 30, 0.3);
 }
 
 /* Responsive */
