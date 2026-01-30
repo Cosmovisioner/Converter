@@ -3,33 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>通貨コンバーター | Currency Converter</title>
+    <title>CONVERTER | Currency Exchange</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
+        <!-- Chopsticks decoration -->
+        <div class="chopsticks">
+            <div class="chopstick"></div>
+            <div class="chopstick"></div>
+        </div>
 
         <!-- Main converter card -->
         <div class="converter-card">
             <header class="header">
                 <h1 class="title">
-                    <span class="title-jp">通貨</span>
-                    <span class="title-main">КОНВЕРТЕР</span>
-                    <span class="title-symbol">円</span>
+                    <span class="title-main">CONVERTER</span>
                 </h1>
-                <p class="subtitle">リアルタイム為替レート</p>
+                <p class="subtitle">Real-time currency exchange</p>
+                <p class="subtitle-jp">リアルタイム通貨換算</p>
             </header>
 
+            <div class="divider">
+                <div class="divider-line"></div>
+                <div class="divider-line"></div>
+            </div>
+
             <div class="currency-inputs">
+                <div class="table-header">
+                    <span>Currency</span>
+                    <span>Amount</span>
+                </div>
+
                 <!-- Russian Ruble -->
                 <div class="currency-row" data-currency="RUB">
                     <div class="currency-info">
                         <span class="flag">🇷🇺</span>
                         <span class="currency-code">RUB</span>
-                        <span class="currency-name">Рубль</span>
                     </div>
                     <input type="number" class="currency-input" id="RUB" placeholder="0.00" step="0.01">
                 </div>
@@ -39,7 +52,6 @@
                     <div class="currency-info">
                         <span class="flag">🇺🇸</span>
                         <span class="currency-code">USD</span>
-                        <span class="currency-name">Доллар</span>
                     </div>
                     <input type="number" class="currency-input" id="USD" placeholder="0.00" step="0.01">
                 </div>
@@ -49,7 +61,6 @@
                     <div class="currency-info">
                         <span class="flag">🇰🇿</span>
                         <span class="currency-code">KZT</span>
-                        <span class="currency-name">Тенге</span>
                     </div>
                     <input type="number" class="currency-input" id="KZT" placeholder="0.00" step="0.01">
                 </div>
@@ -59,17 +70,17 @@
                     <div class="currency-info">
                         <span class="flag">🇯🇵</span>
                         <span class="currency-code">JPY</span>
-                        <span class="currency-name">Йена</span>
                     </div>
                     <input type="number" class="currency-input" id="JPY" placeholder="0.00" step="0.01">
                 </div>
+
+                <div class="total-divider"></div>
 
                 <!-- Kinder Bueno (joke currency) -->
                 <div class="currency-row kinder-row" data-currency="KINDER">
                     <div class="currency-info">
                         <span class="flag">🍫</span>
                         <span class="currency-code">KINDER</span>
-                        <span class="currency-name">Буэно</span>
                     </div>
                     <input type="number" class="currency-input" id="KINDER" placeholder="0.00" step="0.01">
                 </div>
@@ -77,14 +88,18 @@
 
             <button class="lucky-button" id="luckyBtn">
                 <span class="btn-icon">🎲</span>
-                <span class="btn-text">Мне повезёт!</span>
-                <span class="btn-jp">運試し</span>
+                <span class="btn-text">Random!</span>
             </button>
 
             <footer class="footer">
                 <div class="update-info">
                     <span class="update-icon">⟳</span>
-                    <span id="updateTime">Загрузка курса...</span>
+                    <span id="updateTime">Loading rates...</span>
+                </div>
+                
+                <div class="logo-badge">
+                    <div class="logo-text">換算機</div>
+                    <div class="logo-subtitle">Bold Rates!</div>
                 </div>
             </footer>
         </div>
