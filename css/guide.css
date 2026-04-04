@@ -32,18 +32,6 @@ body.guide-page {
     border-bottom-color: var(--red-bg);
 }
 
-.guide-lead {
-    font-size: 0.8rem;
-    line-height: 1.55;
-    color: #333;
-    margin-bottom: 20px;
-    text-align: left;
-}
-
-.guide-lead strong {
-    font-weight: 800;
-}
-
 /* Accordion sections (<details>) — закрыты по умолчанию */
 .guide-accordion {
     margin-top: 8px;
