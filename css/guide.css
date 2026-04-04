@@ -210,6 +210,13 @@ a.guide-map-link:hover {
     color: #a02800;
 }
 
+.guide-phrase-list li em {
+    font-style: normal;
+    font-size: 0.72rem;
+    color: #555;
+    letter-spacing: 0.02em;
+}
+
 @media (max-width: 420px) {
     .guide-details__label > span {
         font-size: 0.74rem;
