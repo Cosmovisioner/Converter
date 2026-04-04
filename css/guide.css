@@ -198,6 +198,29 @@ body.guide-page {
     line-height: 1.45;
 }
 
+.guide-amap-hint {
+    font-size: 0.72rem;
+    line-height: 1.45;
+    color: #444;
+    margin: 0 0 14px;
+    padding: 10px 12px;
+    background: rgba(255, 255, 255, 0.5);
+    border: 2px solid var(--black);
+    border-radius: 6px;
+}
+
+a.guide-map-link {
+    color: var(--red-bg);
+    font-weight: 800;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+}
+
+a.guide-map-link:hover {
+    color: #a02800;
+}
+
 @media (max-width: 420px) {
     .guide-details__label > span {
         font-size: 0.74rem;
