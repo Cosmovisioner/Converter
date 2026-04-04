@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css?v=20260404">
+    <link rel="stylesheet" href="css/style.css?v=20260404b">
 </head>
 <body>
     <div class="container">
@@ -33,21 +33,6 @@
                 <div class="divider-line"></div>
                 <div class="divider-line"></div>
             </div>
-
-            <section class="hero-panel" aria-label="Ввод суммы">
-                <p class="hero-label">Ваша сумма</p>
-                <div class="hero-controls">
-                    <input type="number" class="hero-input" id="heroAmount" placeholder="0" step="any" inputmode="decimal" aria-label="Сумма">
-                    <select class="hero-select" id="heroCurrency" aria-label="Валюта ввода">
-                        <option value="RUB">RUB ₽</option>
-                        <option value="USD">USD $</option>
-                        <option value="KZT">KZT ₸</option>
-                        <option value="CNY">CNY ¥</option>
-                        <option value="KINDER">Kinder Bueno</option>
-                    </select>
-                </div>
-                <p class="hero-hint">Выберите валюту и введите число — ниже покажутся все пересчёты.</p>
-            </section>
 
             <div class="currency-inputs">
                 <div class="table-header">
@@ -103,6 +88,33 @@
                 </div>
             </div>
 
+            <section class="hero-panel" aria-label="Ввод суммы">
+                <div class="hero-panel-topline">
+                    <div class="divider-line"></div>
+                    <div class="divider-line"></div>
+                </div>
+                <p class="hero-label">Ваша сумма</p>
+                <div class="hero-controls">
+                    <div class="hero-field hero-field--amount">
+                        <span class="hero-field-label">Сумма</span>
+                        <input type="number" class="hero-input" id="heroAmount" placeholder="0" step="any" inputmode="decimal" aria-label="Сумма">
+                    </div>
+                    <div class="hero-field hero-field--currency">
+                        <span class="hero-field-label">Валюта</span>
+                        <div class="hero-select-wrap">
+                            <select class="hero-select" id="heroCurrency" aria-label="Валюта ввода">
+                                <option value="RUB">RUB ₽</option>
+                                <option value="USD">USD $</option>
+                                <option value="KZT">KZT ₸</option>
+                                <option value="CNY">CNY ¥</option>
+                                <option value="KINDER">Kinder Bueno</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <p class="hero-hint">Таблица выше пересчитается под эту сумму и валюту.</p>
+            </section>
+
             <button class="lucky-button" id="luckyBtn">
                 <span class="btn-icon">🎲</span>
                 <span class="btn-text">Random!</span>
@@ -123,6 +135,6 @@
         </div>
     </div>
 
-    <script src="js/script.js?v=20260404"></script>
+    <script src="js/script.js?v=20260404b"></script>
 </body>
 </html>

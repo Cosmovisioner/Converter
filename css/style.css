@@ -171,47 +171,90 @@ body {
     height: 2px;
 }
 
-/* Hero: amount + currency selector */
+/* Hero: amount + currency — same design language as table + Random button */
 .hero-panel {
-    margin-bottom: 20px;
-    padding: 14px 12px;
-    border: 2px dashed var(--black);
-    border-radius: 6px;
-    background: rgba(255, 255, 255, 0.35);
+    margin-top: 8px;
+    margin-bottom: 18px;
+    padding: 16px 8px 12px;
+}
+
+.hero-panel-topline {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    margin-bottom: 14px;
+}
+
+.hero-panel-topline .divider-line {
+    height: 3px;
+    background: var(--black);
+    border-radius: 2px;
+}
+
+.hero-panel-topline .divider-line:nth-child(2) {
+    height: 2px;
 }
 
 .hero-label {
-    font-weight: 900;
-    font-size: 0.75rem;
+    font-family: 'Dela Gothic One', cursive;
+    font-size: 0.95rem;
     text-transform: uppercase;
-    letter-spacing: 2px;
-    margin-bottom: 10px;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
     color: var(--black);
+    text-align: center;
 }
 
 .hero-controls {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
-    align-items: center;
+    gap: 12px;
+    align-items: stretch;
+    justify-content: center;
+}
+
+.hero-field {
+    flex: 1 1 140px;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.hero-field-label {
+    font-weight: 900;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--black);
+    padding-left: 2px;
 }
 
 .hero-input {
-    flex: 1 1 120px;
-    min-width: 0;
+    width: 100%;
+    box-sizing: border-box;
     font-family: 'Inter', sans-serif;
-    font-size: 1.25rem;
-    font-weight: 800;
-    padding: 10px 12px;
-    border: 2px solid var(--black);
-    border-radius: 6px;
-    background: #fff;
+    font-size: 1.15rem;
+    font-weight: 900;
+    padding: 12px 14px;
+    border: 3px solid var(--black);
+    border-radius: 8px;
+    background: var(--cream);
     color: var(--black);
+    text-align: right;
+    box-shadow: 4px 4px 0 var(--black);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.hero-input:hover {
+    transform: translate(-1px, -1px);
+    box-shadow: 5px 5px 0 var(--black);
 }
 
 .hero-input:focus {
     outline: none;
-    box-shadow: 3px 3px 0 var(--yellow);
+    background: #fff;
+    box-shadow: 4px 4px 0 var(--red-bg);
 }
 
 .hero-input::-webkit-outer-spin-button,
@@ -220,24 +263,67 @@ body {
     margin: 0;
 }
 
+.hero-select-wrap {
+    position: relative;
+    width: 100%;
+}
+
+.hero-select-wrap::after {
+    content: '';
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 8px solid var(--black);
+    transform: translateY(-40%);
+    pointer-events: none;
+    z-index: 1;
+}
+
 .hero-select {
-    flex: 1 1 160px;
+    width: 100%;
+    box-sizing: border-box;
     font-family: 'Inter', sans-serif;
-    font-weight: 700;
-    font-size: 0.95rem;
-    padding: 10px 12px;
-    border: 2px solid var(--black);
-    border-radius: 6px;
+    font-weight: 900;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 12px 36px 12px 14px;
+    border: 3px solid var(--black);
+    border-radius: 8px;
     background: var(--yellow);
     color: var(--black);
     cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    box-shadow: 4px 4px 0 var(--black);
+    transition: background 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.hero-select:hover {
+    background: var(--yellow-dark);
+    transform: translate(-1px, -1px);
+    box-shadow: 5px 5px 0 var(--black);
+}
+
+.hero-select:focus {
+    outline: none;
+    background: #fff8e0;
+    box-shadow: 4px 4px 0 var(--red-bg);
 }
 
 .hero-hint {
-    margin-top: 10px;
-    font-size: 0.7rem;
-    color: #555;
-    line-height: 1.4;
+    margin-top: 12px;
+    font-size: 0.65rem;
+    font-weight: 600;
+    color: #444;
+    line-height: 1.45;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .hero-panel.flash {
@@ -502,11 +588,22 @@ body {
         width: 150px;
         height: 6px;
     }
+
+    .hero-controls {
+        flex-direction: column;
+    }
+
+    .hero-field {
+        flex: 1 1 auto;
+        width: 100%;
+    }
 }
 
 /* Loading state */
-.loading .currency-input {
-    opacity: 0.5;
+.loading .currency-input,
+.loading .hero-input,
+.loading .hero-select {
+    opacity: 0.55;
 }
 
 /* Scrollbar */
