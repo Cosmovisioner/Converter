@@ -18,6 +18,9 @@ build/
 # Logs
 *.log
 
+# Local batch / downloads (not part of app)
+downloads_batch/
+
 # Environment variables
 .env
 .env.local
