@@ -7,6 +7,8 @@ A real-time currency converter with a Japanese receipt-inspired design.
 
 **[Live Demo](https://cosmovisioner.github.io/Converter/)**
 
+Важно: адрес с **точным регистром** — `/Converter/` (с большой **C**). Вариант `/CONVERTER/` целиком заглавными на GitHub Pages даёт **404** или старую закэшированную страницу. Если не видишь обновлений — открой ссылку заново и нажми **Cmd+Shift+R** (жёсткое обновление).
+
 ## Features
 
 - **Real-time exchange rates** — fetched from ExchangeRate API
