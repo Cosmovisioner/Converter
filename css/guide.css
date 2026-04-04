@@ -149,6 +149,19 @@ body.guide-page {
     font-size: 0.85rem;
 }
 
+.guide-ol {
+    margin: 0 0 12px;
+    padding-left: 1.25rem;
+    font-size: 0.78rem;
+    line-height: 1.55;
+    color: #2a2a2a;
+}
+
+.guide-ol li {
+    margin-bottom: 8px;
+    padding-left: 4px;
+}
+
 .guide-note {
     font-size: 0.65rem;
     font-weight: 600;
