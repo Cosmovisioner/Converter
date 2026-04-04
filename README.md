@@ -11,7 +11,9 @@ A real-time currency converter with a Japanese receipt-inspired design.
 
 - **Real-time exchange rates** — fetched from ExchangeRate API
 - **Instant conversion** — type in any field, others update automatically
-- **5 currencies** — RUB, USD, KZT, JPY + Kinder Bueno (1 = 100 RUB)
+- **5 currencies** — RUB, USD, KZT, CNY (юань) + Kinder Bueno (1 шт. = 95 ₽)
+- **Hero row** — ввод суммы и выбор валюты одной строкой
+- **Два источника курса** — если первый недоступен (в т.ч. из Китая), подключается запасной CDN
 - **"Random!" button** — generates random amounts for fun
 - **Auto-refresh** — rates update every 5 minutes
 - **Offline mode** — uses cached rates when offline

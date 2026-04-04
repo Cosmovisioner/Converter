@@ -1,112 +1,190 @@
 // ========================================
-// ANIME CURRENCY CONVERTER - JAVASCRIPT
-// Real-time exchange rates
+// CURRENCY CONVERTER — real-time rates
+// CNY + Kinder Bueno (95 ₽) + hero input
 // ========================================
 
-// Configuration
 const CONFIG = {
-    currencies: ['RUB', 'USD', 'KZT', 'JPY', 'KINDER'],
-    baseCurrency: 'USD',
-    updateInterval: 5 * 60 * 1000, // 5 minutes
-    apiUrl: 'https://open.er-api.com/v6/latest/USD',
-    kinderPriceRUB: 100 // 1 Kinder Bueno = 100 RUB
+    currencies: ['RUB', 'USD', 'KZT', 'CNY', 'KINDER'],
+    updateInterval: 5 * 60 * 1000,
+    kinderPriceRUB: 95,
+    apiSources: [
+        { name: 'open.er-api', fetch: fetchOpenErApi },
+        { name: 'jsdelivr-currency-api', fetch: fetchJsdelivrCurrencyApi }
+    ]
 };
 
-// State
 let exchangeRates = {};
 let lastUpdate = null;
 let isLoading = false;
 
-// DOM Elements
 const inputs = {};
+let heroAmountEl;
+let heroCurrencyEl;
 const updateTimeEl = document.getElementById('updateTime');
 const luckyBtn = document.getElementById('luckyBtn');
 
-// Initialize
 document.addEventListener('DOMContentLoaded', () => {
+    heroAmountEl = document.getElementById('heroAmount');
+    heroCurrencyEl = document.getElementById('heroCurrency');
     initInputs();
+    setupHero();
     fetchRates();
     setupAutoUpdate();
     setupLuckyButton();
     loadSavedValues();
 });
 
-// Initialize input elements and event listeners
 function initInputs() {
-    CONFIG.currencies.forEach(currency => {
+    CONFIG.currencies.forEach((currency) => {
         const input = document.getElementById(currency);
         if (input) {
             inputs[currency] = input;
-            input.addEventListener('input', (e) => handleInput(currency, e.target.value));
-            input.addEventListener('focus', () => selectInput(input));
+            input.addEventListener('input', (e) => handleRowInput(currency, e.target.value));
+            input.addEventListener('focus', () => input.select());
         }
     });
 }
 
-// Select all text on focus
-function selectInput(input) {
-    setTimeout(() => input.select(), 0);
+function setupHero() {
+    heroAmountEl.addEventListener('input', () => handleHeroInput());
+    heroCurrencyEl.addEventListener('change', () => handleHeroInput());
 }
 
-// Fetch exchange rates from API
+function handleHeroInput() {
+    const raw = heroAmountEl.value;
+    const currency = heroCurrencyEl.value;
+    const numericValue = parseFloat(raw);
+
+    if (raw === '' || raw === '-' || raw === '.') {
+        return;
+    }
+
+    if (isNaN(numericValue) || numericValue === 0) {
+        clearAllAmounts();
+        return;
+    }
+
+    convertFromCurrency(currency, numericValue);
+    flashHero();
+    saveCurrentValues();
+}
+
+function handleRowInput(sourceCurrency, value) {
+    syncHeroFrom(sourceCurrency, value);
+
+    const numericValue = parseFloat(value);
+
+    if (isNaN(numericValue) || numericValue === 0) {
+        clearAllAmounts();
+        return;
+    }
+
+    convertFromCurrency(sourceCurrency, numericValue);
+    saveCurrentValues();
+}
+
+function syncHeroFrom(currency, value) {
+    heroCurrencyEl.value = currency;
+    heroAmountEl.value = value;
+}
+
+function clearAllAmounts() {
+    CONFIG.currencies.forEach((c) => {
+        inputs[c].value = '';
+    });
+    heroAmountEl.value = '';
+    localStorage.removeItem('savedValues');
+}
+
+async function fetchOpenErApi(signal) {
+    const response = await fetch('https://open.er-api.com/v6/latest/USD', { signal });
+    if (!response.ok) throw new Error('open.er-api HTTP');
+    const data = await response.json();
+    if (data.result !== 'success') throw new Error('open.er-api result');
+    return normalizeFromUsdRates({
+        USD: 1,
+        RUB: data.rates.RUB,
+        KZT: data.rates.KZT,
+        CNY: data.rates.CNY
+    });
+}
+
+async function fetchJsdelivrCurrencyApi(signal) {
+    const response = await fetch(
+        'https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/usd.json',
+        { signal }
+    );
+    if (!response.ok) throw new Error('jsdelivr HTTP');
+    const data = await response.json();
+    const usd = data.usd || data.USD;
+    if (!usd || typeof usd !== 'object') throw new Error('jsdelivr shape');
+    const upper = {};
+    Object.keys(usd).forEach((k) => {
+        upper[k.toUpperCase()] = usd[k];
+    });
+    return normalizeFromUsdRates({
+        USD: 1,
+        RUB: upper.RUB,
+        KZT: upper.KZT,
+        CNY: upper.CNY
+    });
+}
+
+function normalizeFromUsdRates(r) {
+    if (!r.RUB || !r.CNY || !r.KZT) {
+        throw new Error('missing currency in response');
+    }
+    r.KINDER = r.RUB / CONFIG.kinderPriceRUB;
+    return r;
+}
+
 async function fetchRates() {
     if (isLoading) return;
-    
+
     isLoading = true;
     setLoadingState(true);
     updateTimeEl.textContent = 'Загрузка курса...';
-    
+
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 15000);
+
+    let lastError = null;
+
     try {
-        // Create abort controller for timeout
-        const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 sec timeout
-        
-        // Fetch rates with USD as base
-        const response = await fetch(CONFIG.apiUrl, {
-            signal: controller.signal
-        });
-        
-        clearTimeout(timeoutId);
-        
-        if (!response.ok) {
-            throw new Error('API request failed');
+        for (const source of CONFIG.apiSources) {
+            try {
+                exchangeRates = await source.fetch(controller.signal);
+                lastUpdate = new Date();
+                updateTimeDisplay();
+                saveRatesToLocal();
+                reapplyCurrentAmount();
+                console.log(`Rates from ${source.name}:`, exchangeRates);
+                lastError = null;
+                break;
+            } catch (e) {
+                lastError = e;
+                console.warn(`${source.name} failed:`, e);
+            }
         }
-        
-        const data = await response.json();
-        
-        if (data.result !== 'success') {
-            throw new Error('API returned error');
+
+        if (lastError) {
+            throw lastError;
         }
-        
-        // Store rates relative to USD
-        exchangeRates = {
-            USD: 1,
-            RUB: data.rates.RUB,
-            KZT: data.rates.KZT,
-            JPY: data.rates.JPY
-        };
-        
-        // Add KINDER rate (based on RUB price)
-        // 1 KINDER = 100 RUB, so KINDER rate = RUB rate / 100
-        if (exchangeRates.RUB) {
-            exchangeRates.KINDER = exchangeRates.RUB / CONFIG.kinderPriceRUB;
-        }
-        
-        lastUpdate = new Date();
-        updateTimeDisplay();
-        saveRatesToLocal();
-        
-        console.log('Rates updated:', exchangeRates);
-        
     } catch (error) {
-        console.error('Failed to fetch rates:', error);
-        
-        // Try to load from localStorage
+        console.error('All rate sources failed:', error);
+
         const savedRates = localStorage.getItem('exchangeRates');
         const savedTime = localStorage.getItem('lastUpdate');
-        
+
         if (savedRates) {
             exchangeRates = JSON.parse(savedRates);
+            if (exchangeRates.JPY != null && exchangeRates.CNY == null) {
+                exchangeRates.CNY = exchangeRates.JPY;
+            }
+            delete exchangeRates.JPY;
+            if (exchangeRates.RUB) {
+                exchangeRates.KINDER = exchangeRates.RUB / CONFIG.kinderPriceRUB;
+            }
             if (savedTime) {
                 const date = new Date(savedTime);
                 const hours = date.getHours().toString().padStart(2, '0');
@@ -115,29 +193,48 @@ async function fetchRates() {
             } else {
                 updateTimeEl.textContent = 'Используется кэш';
             }
+            reapplyCurrentAmount();
         } else {
-            // Fallback rates (approximate)
             exchangeRates = {
                 USD: 1,
-                RUB: 100,
+                RUB: 95,
                 KZT: 500,
-                JPY: 155,
-                KINDER: 1 // 100 / 100
+                CNY: 7.2,
+                KINDER: 95 / CONFIG.kinderPriceRUB
             };
             updateTimeEl.textContent = 'Курс примерный';
+            reapplyCurrentAmount();
         }
     } finally {
+        clearTimeout(timeoutId);
         isLoading = false;
         setLoadingState(false);
     }
 }
 
-// Set loading visual state
+function reapplyCurrentAmount() {
+    const heroRaw = heroAmountEl.value;
+    const heroCur = heroCurrencyEl.value;
+    const n = parseFloat(heroRaw);
+    if (heroRaw !== '' && !isNaN(n) && n !== 0) {
+        convertFromCurrency(heroCur, n);
+        return;
+    }
+
+    const first = CONFIG.currencies.find((c) => inputs[c].value);
+    if (first) {
+        const v = parseFloat(inputs[first].value);
+        if (!isNaN(v) && v !== 0) {
+            syncHeroFrom(first, inputs[first].value);
+            convertFromCurrency(first, v);
+        }
+    }
+}
+
 function setLoadingState(loading) {
     document.body.classList.toggle('loading', loading);
 }
 
-// Update time display
 function updateTimeDisplay() {
     if (lastUpdate) {
         const hours = lastUpdate.getHours().toString().padStart(2, '0');
@@ -146,149 +243,124 @@ function updateTimeDisplay() {
     }
 }
 
-// Save rates to localStorage
 function saveRatesToLocal() {
     localStorage.setItem('exchangeRates', JSON.stringify(exchangeRates));
     localStorage.setItem('lastUpdate', lastUpdate.toISOString());
 }
 
-// Setup auto-update interval
 function setupAutoUpdate() {
     setInterval(fetchRates, CONFIG.updateInterval);
 }
 
-// Handle input change
-function handleInput(sourceCurrency, value) {
-    // Remove non-numeric characters except decimal point
-    const numericValue = parseFloat(value);
-    
-    if (isNaN(numericValue) || numericValue === 0) {
-        // Clear all inputs if invalid or zero
-        CONFIG.currencies.forEach(currency => {
-            if (currency !== sourceCurrency) {
-                inputs[currency].value = '';
-            }
-        });
-        saveCurrentValues();
-        return;
-    }
-    
-    // Convert to all other currencies
-    convertFromCurrency(sourceCurrency, numericValue);
-    saveCurrentValues();
-}
-
-// Convert from one currency to all others
 function convertFromCurrency(fromCurrency, amount) {
-    // First convert to USD (base)
-    const amountInUSD = amount / exchangeRates[fromCurrency];
-    
-    // Then convert USD to all other currencies
-    CONFIG.currencies.forEach(toCurrency => {
+    const rate = exchangeRates[fromCurrency];
+    if (rate == null || rate === 0) return;
+
+    const amountInUSD = amount / rate;
+
+    CONFIG.currencies.forEach((toCurrency) => {
         if (toCurrency !== fromCurrency) {
-            const convertedAmount = amountInUSD * exchangeRates[toCurrency];
-            inputs[toCurrency].value = formatNumber(convertedAmount, toCurrency);
+            const converted = amountInUSD * exchangeRates[toCurrency];
+            inputs[toCurrency].value = formatNumber(converted, toCurrency);
             flashInput(toCurrency);
+        } else {
+            inputs[toCurrency].value = formatNumber(amount, toCurrency);
         }
     });
 }
 
-// Format number based on currency
 function formatNumber(number, currency) {
-    // JPY and KZT typically don't use decimals for small amounts
-    if (currency === 'JPY' || currency === 'KZT') {
-        if (number >= 1) {
-            return Math.round(number).toString();
-        }
+    if (currency === 'KZT') {
+        if (number >= 1) return Math.round(number).toString();
     }
-    
-    // KINDER - show 2 decimals (can be fractional chocolates!)
+
     if (currency === 'KINDER') {
         return number.toFixed(2);
     }
-    
-    // For other currencies, use 2 decimal places
-    if (number >= 0.01) {
-        return number.toFixed(2);
+
+    if (currency === 'CNY' || currency === 'USD' || currency === 'RUB') {
+        if (number >= 0.01) return number.toFixed(2);
     }
-    
-    // For very small numbers, use more precision
+
+    if (number >= 0.01) return number.toFixed(2);
+
     return number.toPrecision(4);
 }
 
-// Flash animation on updated inputs
 function flashInput(currency) {
     const row = inputs[currency].closest('.currency-row');
+    if (!row) return;
     row.classList.remove('flash');
-    // Trigger reflow
     void row.offsetWidth;
     row.classList.add('flash');
 }
 
-// Save current values to localStorage
+function flashHero() {
+    const panel = document.querySelector('.hero-panel');
+    if (!panel) return;
+    panel.classList.remove('flash');
+    void panel.offsetWidth;
+    panel.classList.add('flash');
+}
+
 function saveCurrentValues() {
-    const values = {};
-    CONFIG.currencies.forEach(currency => {
+    const values = { heroCurrency: heroCurrencyEl.value, heroAmount: heroAmountEl.value };
+    CONFIG.currencies.forEach((currency) => {
         values[currency] = inputs[currency].value;
     });
     localStorage.setItem('savedValues', JSON.stringify(values));
 }
 
-// Load saved values from localStorage
 function loadSavedValues() {
     const saved = localStorage.getItem('savedValues');
-    if (saved) {
-        const values = JSON.parse(saved);
-        const firstNonEmpty = CONFIG.currencies.find(c => values[c]);
-        
-        if (firstNonEmpty) {
-            inputs[firstNonEmpty].value = values[firstNonEmpty];
-            // Wait for rates to load, then convert
-            setTimeout(() => {
-                if (Object.keys(exchangeRates).length > 0) {
-                    handleInput(firstNonEmpty, values[firstNonEmpty]);
-                }
-            }, 1000);
-        }
+    if (!saved) return;
+
+    let values;
+    try {
+        values = JSON.parse(saved);
+    } catch {
+        return;
+    }
+
+    if (values.JPY != null && values.CNY == null) {
+        values.CNY = values.JPY;
+        delete values.JPY;
+    }
+
+    if (values.heroAmount != null && values.heroCurrency) {
+        heroCurrencyEl.value = values.heroCurrency;
+        heroAmountEl.value = values.heroAmount;
+        return;
+    }
+
+    const first = CONFIG.currencies.find((c) => values[c]);
+    if (first) {
+        inputs[first].value = values[first];
+        syncHeroFrom(first, values[first]);
     }
 }
 
-// Setup lucky button
 function setupLuckyButton() {
     luckyBtn.addEventListener('click', generateRandomAmount);
 }
 
-// Generate random amount and show all conversions
 function generateRandomAmount() {
-    // Add click animation
     luckyBtn.style.transform = 'scale(0.95)';
     setTimeout(() => {
         luckyBtn.style.transform = '';
     }, 100);
-    
-    // Generate random USD amount (base for conversion)
-    const randomUSD = Math.floor(Math.random() * 1000) + 1; // 1 - 1001 dollars
-    
-    // Fill ALL fields with converted values
-    CONFIG.currencies.forEach(currency => {
-        const convertedAmount = randomUSD * exchangeRates[currency];
-        inputs[currency].value = formatNumber(convertedAmount, currency);
+
+    const randomUSD = Math.floor(Math.random() * 1000) + 1;
+
+    heroCurrencyEl.value = 'USD';
+    heroAmountEl.value = String(randomUSD);
+
+    CONFIG.currencies.forEach((currency) => {
+        const converted = randomUSD * exchangeRates[currency];
+        inputs[currency].value = formatNumber(converted, currency);
         flashInput(currency);
     });
-    
-    // Save values
-    saveCurrentValues();
-}
 
-// Utility: Debounce function
-function debounce(func, wait) {
-    let timeout;
-    return function executedFunction(...args) {
-        const later = () => {
-            clearTimeout(timeout);
-            func(...args);
-        };
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-    };
+    flashHero();
+    saveCurrentValues();
 }

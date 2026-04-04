@@ -32,6 +32,21 @@
                 <div class="divider-line"></div>
             </div>
 
+            <section class="hero-panel" aria-label="Ввод суммы">
+                <p class="hero-label">Ваша сумма</p>
+                <div class="hero-controls">
+                    <input type="number" class="hero-input" id="heroAmount" placeholder="0" step="any" inputmode="decimal" aria-label="Сумма">
+                    <select class="hero-select" id="heroCurrency" aria-label="Валюта ввода">
+                        <option value="RUB">RUB ₽</option>
+                        <option value="USD">USD $</option>
+                        <option value="KZT">KZT ₸</option>
+                        <option value="CNY">CNY ¥</option>
+                        <option value="KINDER">Kinder Bueno</option>
+                    </select>
+                </div>
+                <p class="hero-hint">Выберите валюту и введите число — ниже покажутся все пересчёты.</p>
+            </section>
+
             <div class="currency-inputs">
                 <div class="table-header">
                     <span>Currency</span>
@@ -65,22 +80,22 @@
                     <input type="number" class="currency-input" id="KZT" placeholder="0.00" step="0.01">
                 </div>
 
-                <!-- Japanese Yen -->
-                <div class="currency-row" data-currency="JPY">
+                <!-- Chinese Yuan -->
+                <div class="currency-row" data-currency="CNY">
                     <div class="currency-info">
-                        <span class="flag">🇯🇵</span>
-                        <span class="currency-code">JPY</span>
+                        <span class="flag">🇨🇳</span>
+                        <span class="currency-code">CNY</span>
                     </div>
-                    <input type="number" class="currency-input" id="JPY" placeholder="0.00" step="0.01">
+                    <input type="number" class="currency-input" id="CNY" placeholder="0.00" step="0.01">
                 </div>
 
                 <div class="total-divider"></div>
 
-                <!-- Kinder Bueno (joke currency) -->
+                <!-- Kinder Bueno (1 шт. = 95 ₽) -->
                 <div class="currency-row kinder-row" data-currency="KINDER">
                     <div class="currency-info">
                         <span class="flag">🍫</span>
-                        <span class="currency-code">KINDER</span>
+                        <span class="currency-code kinder-code">KINDER BUENO</span>
                     </div>
                     <input type="number" class="currency-input" id="KINDER" placeholder="0.00" step="0.01">
                 </div>
@@ -94,8 +109,9 @@
             <footer class="footer">
                 <div class="update-info">
                     <span class="update-icon">⟳</span>
-                    <span id="updateTime">Loading rates...</span>
+                    <span id="updateTime">Загрузка курса...</span>
                 </div>
+                <p class="china-hint">В Китае курс может грузиться дольше — при сбое обновите страницу.</p>
                 
                 <div class="logo-badge">
                     <div class="logo-text">換算機</div>
