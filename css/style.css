@@ -527,6 +527,25 @@ body {
     margin-right: auto;
 }
 
+.footer-guide-link {
+    margin-top: 12px;
+    font-size: 0.65rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+.footer-guide-link a {
+    color: var(--black);
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 3px;
+}
+
+.footer-guide-link a:hover {
+    color: var(--red-bg);
+}
+
 /* Logo/Badge at bottom */
 .logo-badge {
     margin-top: 15px;

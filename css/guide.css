@@ -1,0 +1,155 @@
+/* China guide MVP — same receipt palette as converter, long-scroll mobile layout */
+
+body.guide-page {
+    align-items: flex-start;
+    padding-top: 22px;
+    padding-bottom: 48px;
+}
+
+.guide-card {
+    padding-bottom: 28px;
+}
+
+.guide-top-nav {
+    text-align: center;
+    margin-bottom: 18px;
+}
+
+.guide-top-nav a {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--black);
+    text-decoration: none;
+    border-bottom: 2px solid var(--black);
+    padding-bottom: 2px;
+}
+
+.guide-top-nav a:hover {
+    color: var(--red-bg);
+    border-bottom-color: var(--red-bg);
+}
+
+.guide-lead {
+    font-size: 0.8rem;
+    line-height: 1.55;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.guide-lead strong {
+    font-weight: 800;
+}
+
+.guide-section {
+    margin-top: 22px;
+}
+
+.guide-section:first-of-type {
+    margin-top: 8px;
+}
+
+.guide-section-title {
+    font-family: 'Dela Gothic One', cursive;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--black);
+    margin-bottom: 10px;
+    padding-bottom: 6px;
+    border-bottom: 3px solid var(--black);
+}
+
+.guide-section-title span {
+    display: inline-block;
+    background: var(--yellow);
+    padding: 2px 8px;
+    border-radius: 4px;
+    border: 2px solid var(--black);
+    box-shadow: 3px 3px 0 var(--black);
+}
+
+.guide-subtitle {
+    font-size: 0.72rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #444;
+    margin: 14px 0 8px;
+}
+
+.guide-p {
+    font-size: 0.78rem;
+    line-height: 1.55;
+    color: #2a2a2a;
+    margin-bottom: 10px;
+}
+
+.guide-list {
+    list-style: none;
+    margin: 0 0 12px;
+    padding: 0;
+}
+
+.guide-list li {
+    position: relative;
+    font-size: 0.78rem;
+    line-height: 1.5;
+    color: #2a2a2a;
+    padding-left: 14px;
+    margin-bottom: 8px;
+}
+
+.guide-list li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: var(--red-bg);
+    font-weight: 900;
+    font-size: 0.85rem;
+}
+
+.guide-note {
+    font-size: 0.65rem;
+    font-weight: 600;
+    line-height: 1.45;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-top: 12px;
+    padding: 10px 12px;
+    background: rgba(247, 201, 72, 0.25);
+    border: 2px dashed #999;
+    border-radius: 6px;
+}
+
+.guide-footer {
+    margin-top: 28px;
+    padding-top: 16px;
+    border-top: 1px dashed #999;
+    text-align: center;
+}
+
+.guide-footer .logo-badge {
+    margin-top: 12px;
+}
+
+.guide-mono {
+    font-size: 0.68rem;
+    word-break: break-word;
+    background: rgba(0, 0, 0, 0.06);
+    padding: 8px 10px;
+    border-radius: 6px;
+    border-left: 3px solid var(--black);
+    margin: 8px 0;
+    line-height: 1.45;
+}
+
+@media (max-width: 420px) {
+    .guide-section-title {
+        font-size: 0.88rem;
+    }
+}
