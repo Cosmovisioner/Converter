@@ -527,23 +527,28 @@ body {
     margin-right: auto;
 }
 
-.footer-guide-link {
-    margin-top: 12px;
-    font-size: 0.65rem;
+/* Как ссылка «← Конвертер» на странице гида */
+.footer-guide-cta {
+    margin-top: 18px;
+    margin-bottom: 2px;
+    text-align: center;
+}
+
+.footer-guide-cta a {
+    display: inline-block;
+    font-size: 0.7rem;
     font-weight: 800;
     text-transform: uppercase;
-    letter-spacing: 0.08em;
-}
-
-.footer-guide-link a {
+    letter-spacing: 0.12em;
     color: var(--black);
-    text-decoration: underline;
-    text-decoration-thickness: 2px;
-    text-underline-offset: 3px;
+    text-decoration: none;
+    border-bottom: 2px solid var(--black);
+    padding-bottom: 2px;
 }
 
-.footer-guide-link a:hover {
+.footer-guide-cta a:hover {
     color: var(--red-bg);
+    border-bottom-color: var(--red-bg);
 }
 
 /* Logo/Badge at bottom */

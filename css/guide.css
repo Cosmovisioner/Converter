@@ -44,32 +44,81 @@ body.guide-page {
     font-weight: 800;
 }
 
-.guide-section {
-    margin-top: 22px;
-}
-
-.guide-section:first-of-type {
+/* Accordion sections (<details>) — закрыты по умолчанию */
+.guide-accordion {
     margin-top: 8px;
 }
 
-.guide-section-title {
-    font-family: 'Dela Gothic One', cursive;
-    font-size: 0.95rem;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: var(--black);
-    margin-bottom: 10px;
-    padding-bottom: 6px;
-    border-bottom: 3px solid var(--black);
+.guide-details {
+    margin-top: 10px;
+    border: 2px solid var(--black);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.35);
+    overflow: hidden;
+    box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.12);
 }
 
-.guide-section-title span {
+.guide-details:first-child {
+    margin-top: 0;
+}
+
+.guide-details__summary {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 12px 14px;
+    cursor: pointer;
+    background: linear-gradient(180deg, var(--cream) 0%, var(--cream-dark) 100%);
+    -webkit-tap-highlight-color: transparent;
+}
+
+.guide-details__summary::-webkit-details-marker {
+    display: none;
+}
+
+.guide-details__summary::marker {
+    content: '';
+}
+
+.guide-details__summary:hover {
+    background: rgba(247, 201, 72, 0.35);
+}
+
+.guide-details__label > span {
     display: inline-block;
+    font-family: 'Dela Gothic One', cursive;
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--black);
     background: var(--yellow);
-    padding: 2px 8px;
+    padding: 5px 10px;
     border-radius: 4px;
     border: 2px solid var(--black);
     box-shadow: 3px 3px 0 var(--black);
+    line-height: 1.25;
+}
+
+.guide-details__chevron {
+    flex-shrink: 0;
+    font-size: 0.65rem;
+    font-weight: 900;
+    color: var(--black);
+    transition: transform 0.2s ease;
+}
+
+.guide-details[open] .guide-details__chevron {
+    transform: rotate(-180deg);
+}
+
+.guide-details[open] .guide-details__summary {
+    border-bottom: 2px solid var(--black);
+}
+
+.guide-details__body {
+    padding: 14px 14px 16px;
 }
 
 .guide-subtitle {
@@ -149,7 +198,8 @@ body.guide-page {
 }
 
 @media (max-width: 420px) {
-    .guide-section-title {
-        font-size: 0.88rem;
+    .guide-details__label > span {
+        font-size: 0.74rem;
+        padding: 4px 8px;
     }
 }

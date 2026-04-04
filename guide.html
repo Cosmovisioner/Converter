@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Cache-Control" content="no-cache">
-    <title>Китай | Краткий гид</title>
+    <title>Пекин | Краткий гид</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css?v=20260404b">
-    <link rel="stylesheet" href="css/guide.css?v=20260404c">
+    <link rel="stylesheet" href="css/style.css?v=20260404d">
+    <link rel="stylesheet" href="css/guide.css?v=20260404d">
 </head>
 <body class="guide-page">
     <div class="container">
@@ -21,10 +21,10 @@
         <article class="converter-card guide-card">
             <header class="header">
                 <h1 class="title">
-                    <span class="title-main">КИТАЙ</span>
+                    <span class="title-main">ПЕКИН</span>
                 </h1>
                 <p class="subtitle">Краткий гид (черновик)</p>
-                <p class="subtitle-jp">中国メモ · MVP</p>
+                <p class="subtitle-jp">北京メモ · MVP</p>
             </header>
 
             <div class="divider">
@@ -33,150 +33,169 @@
             </div>
 
             <p class="guide-lead">
-                Сжатые заметки для поездки: въезд, связь, оплата, еда и локации в <strong>Пекине</strong> и <strong>Шанхае</strong>.
-                Повторы из разных источников сведены в один пункт; рекламные призывы и ссылки на ролики убраны.
+                Сжатые заметки <strong>только по Пекину</strong>: въезд, связь, оплата, маршруты, улицы и заведения.
+                Повторы сведены в один пункт; рекламные призывы и ссылки на ролики убраны.
             </p>
 
             <nav class="guide-top-nav" aria-label="Навигация">
                 <a href="index.html">← Конвертер валют</a>
             </nav>
 
-            <section class="guide-section" id="immigration">
-                <h2 class="guide-section-title"><span>Въезд и декларация</span></h2>
-                <p class="guide-p">
-                    Перед въездом заполняется электронная декларация (Entry Declaration); на границе показывают <strong>QR-код</strong>.
-                    Форма на портале иммиграционной службы: сайт <span class="guide-mono" style="display:inline;margin:0;padding:0;border:none;background:none;font-weight:800;">s.nia.gov.cn</span> — раздел Entry Declaration.
-                </p>
-                <p class="guide-p">Имеет смысл оформить заранее, ориентир — за сутки до вылета; сохраните QR скриншотом.</p>
-                <p class="guide-subtitle">Кому декларация часто не нужна (упрощённо)</p>
-                <ul class="guide-list">
-                    <li>постоянные резиденты КНР с действующим удостоверением;</li>
-                    <li>прямой транзит до 24 ч без выхода из транзитной зоны;</li>
-                    <li>туристические группы по безвизу / с групповой визой;</li>
-                    <li>экипажи и отдельные категории транзита (круиз туда-обратно, E-channel — уточняйте под свой случай).</li>
-                </ul>
-                <p class="guide-p">При транзите с выходом в город (режимы 24 / 144 ч и т.п.) въездную информацию часто подают через ту же систему — проверьте актуальные правила под ваш маршрут.</p>
-            </section>
+            <div class="guide-accordion">
+                <details class="guide-details" id="immigration">
+                    <summary class="guide-details__summary">
+                        <span class="guide-details__label"><span>Въезд и декларация</span></span>
+                        <span class="guide-details__chevron" aria-hidden="true">▼</span>
+                    </summary>
+                    <div class="guide-details__body">
+                        <p class="guide-p">
+                            Перед въездом заполняется электронная декларация (Entry Declaration); на границе показывают <strong>QR-код</strong>.
+                            Форма на портале иммиграционной службы: сайт <span class="guide-mono" style="display:inline;margin:0;padding:0;border:none;background:none;font-weight:800;">s.nia.gov.cn</span> — раздел Entry Declaration.
+                        </p>
+                        <p class="guide-p">Имеет смысл оформить заранее, ориентир — за сутки до вылета; сохраните QR скриншотом.</p>
+                        <p class="guide-subtitle">Кому декларация часто не нужна (упрощённо)</p>
+                        <ul class="guide-list">
+                            <li>постоянные резиденты КНР с действующим удостоверением;</li>
+                            <li>прямой транзит до 24 ч без выхода из транзитной зоны;</li>
+                            <li>туристические группы по безвизу / с групповой визой;</li>
+                            <li>экипажи и отдельные категории транзита (круиз туда-обратно, E-channel — уточняйте под свой случай).</li>
+                        </ul>
+                        <p class="guide-p">При транзите с выходом в город (режимы 24 / 144 ч и т.п.) въездную информацию часто подают через ту же систему — проверьте актуальные правила под ваш маршрут.</p>
+                    </div>
+                </details>
 
-            <section class="guide-section" id="sim-pay">
-                <h2 class="guide-section-title"><span>Связь и оплата</span></h2>
-                <p class="guide-subtitle">eSIM (пример настройки iPhone)</p>
-                <ul class="guide-list">
-                    <li>Настройки → Сотовая связь → профиль поездки (например CMLink) → включить линию.</li>
-                    <li>Сотовые данные → выбрать eSIM поездки, не основную SIM.</li>
-                    <li>Отключить «переключение сотовых данных», чтобы не уйти в роуминг основной карты.</li>
-                    <li>Номер по умолчанию для звонков/SMS можно оставить основным.</li>
-                </ul>
-                <p class="guide-subtitle">Alipay и WeChat</p>
-                <ul class="guide-list">
-                    <li><strong>Alipay</strong> — самое удобное приложение для оплаты; наличные и иностранные карты тоже возможны, полная зависимость только от Alipay редка.</li>
-                    <li><strong>WeChat</strong>: для оплаты нужен привязанный кошелёк и пройденные настройки безопасности в приложении.</li>
-                </ul>
-                <p class="guide-p">Поиск еды: удобно смотреть фото блюд, место на карте и отзывы в локальных приложениях/картах — так видно реальную подачу и атмосферу.</p>
-            </section>
+                <details class="guide-details" id="sim-pay">
+                    <summary class="guide-details__summary">
+                        <span class="guide-details__label"><span>Связь и оплата</span></span>
+                        <span class="guide-details__chevron" aria-hidden="true">▼</span>
+                    </summary>
+                    <div class="guide-details__body">
+                        <p class="guide-subtitle">eSIM (пример настройки iPhone)</p>
+                        <ul class="guide-list">
+                            <li>Настройки → Сотовая связь → профиль поездки (например CMLink) → включить линию.</li>
+                            <li>Сотовые данные → выбрать eSIM поездки, не основную SIM.</li>
+                            <li>Отключить «переключение сотовых данных», чтобы не уйти в роуминг основной карты.</li>
+                            <li>Номер по умолчанию для звонков/SMS можно оставить основным.</li>
+                        </ul>
+                        <p class="guide-subtitle">Alipay и WeChat</p>
+                        <ul class="guide-list">
+                            <li><strong>Alipay</strong> — самое удобное приложение для оплаты; наличные и иностранные карты тоже возможны, полная зависимость только от Alipay редка.</li>
+                            <li><strong>WeChat</strong>: для оплаты нужен привязанный кошелёк и пройденные настройки безопасности в приложении.</li>
+                        </ul>
+                        <p class="guide-p">Поиск еды: удобно смотреть фото блюд, место на карте и отзывы в локальных приложениях/картах — так видно реальную подачу и атмосферу.</p>
+                    </div>
+                </details>
 
-            <section class="guide-section" id="beijing-route">
-                <h2 class="guide-section-title"><span>Пекин: маршрут и идеи</span></h2>
-                <p class="guide-p">Логика на несколько дней: сгруппировать точки по районам, заложить буфер 30–40 минут на входы и досмотр, одна «большая» локация в день плюс 1–2 рядом.</p>
-                <p class="guide-subtitle">Пример раскладки по дням (можно сократить)</p>
-                <ul class="guide-list">
-                    <li>День 1: Запретный город → парк Цзиншань → Шичахай → Nanluoguxiang.</li>
-                    <li>День 2: Великая стена (Мутяньюй) → храм Юнхэ / вечер в хутунах.</li>
-                    <li>День 3: Храм Неба → Qianmen → Wangfujing → Санлитун.</li>
-                    <li>День 4: Летний дворец <em>или</em> 798 + Олимпийский парк.</li>
-                    <li>День 5: рынок Panjiayuan → Бэйхай → утка по-пекински → трансфер в аэропорт.</li>
-                </ul>
-                <p class="guide-p">Из отдельных идей: панорамные кофейни и «урбанистический» Пекин (кроме классических императорских маршрутов); Universal Beijing — если интересен парк.</p>
-            </section>
+                <details class="guide-details" id="beijing-route">
+                    <summary class="guide-details__summary">
+                        <span class="guide-details__label"><span>Маршрут и идеи</span></span>
+                        <span class="guide-details__chevron" aria-hidden="true">▼</span>
+                    </summary>
+                    <div class="guide-details__body">
+                        <p class="guide-p">Логика на несколько дней: сгруппировать точки по районам, заложить буфер 30–40 минут на входы и досмотр, одна «большая» локация в день плюс 1–2 рядом.</p>
+                        <p class="guide-subtitle">Пример раскладки по дням (можно сократить)</p>
+                        <ul class="guide-list">
+                            <li>День 1: Запретный город → парк Цзиншань → Шичахай → Nanluoguxiang.</li>
+                            <li>День 2: Великая стена (Мутяньюй) → храм Юнхэ / вечер в хутунах.</li>
+                            <li>День 3: Храм Неба → Qianmen → Wangfujing → Санлитун.</li>
+                            <li>День 4: Летний дворец <em>или</em> 798 + Олимпийский парк.</li>
+                            <li>День 5: рынок Panjiayuan → Бэйхай → утка по-пекински → трансфер в аэропорт (в т.ч. Daxing).</li>
+                        </ul>
+                        <p class="guide-p">Из отдельных идей: панорамные кофейни и «урбанистический» Пекин (кроме классических императорских маршрутов); Universal Beijing — если интересен парк.</p>
+                    </div>
+                </details>
 
-            <section class="guide-section" id="streets">
-                <h2 class="guide-section-title"><span>Улицы и кварталы</span></h2>
-                <ul class="guide-list">
-                    <li><strong>Qianmen</strong> — оживлённая ось у входа в центр, удобно стыковать с едой и прогулкой.</li>
-                    <li><strong>Wangfujing</strong> — центральная торговая; рядом масса точек питания.</li>
-                    <li><strong>Nanluoguxiang</strong> — туристическая улочка, много snack и кофе.</li>
-                    <li><strong>Wudaoying Hutong</strong> — спокойнее, рядом с храмом Юнхэ.</li>
-                    <li><strong>Shichahai</strong> — вода и хутуны, вечерняя атмосфера.</li>
-                    <li><strong>Sanlitun / Taikoo Li</strong> — шоппинг и западные кафе; <strong>Sanlitun North Road</strong> — отдельная подборка кофеен.</li>
-                    <li><strong>Fangzhuanchang Hutong</strong> — хутун с упоминанием лапши/локальной еды (мишлен-уровень в отзывах).</li>
-                </ul>
-            </section>
+                <details class="guide-details" id="streets">
+                    <summary class="guide-details__summary">
+                        <span class="guide-details__label"><span>Улицы и кварталы</span></span>
+                        <span class="guide-details__chevron" aria-hidden="true">▼</span>
+                    </summary>
+                    <div class="guide-details__body">
+                        <ul class="guide-list">
+                            <li><strong>Qianmen</strong> — оживлённая ось у входа в центр, удобно стыковать с едой и прогулкой.</li>
+                            <li><strong>Wangfujing</strong> — центральная торговая; рядом масса точек питания.</li>
+                            <li><strong>Nanluoguxiang</strong> — туристическая улочка, много snack и кофе.</li>
+                            <li><strong>Wudaoying Hutong</strong> — спокойнее, рядом с храмом Юнхэ.</li>
+                            <li><strong>Shichahai</strong> — вода и хутуны, вечерняя атмосфера.</li>
+                            <li><strong>Sanlitun / Taikoo Li</strong> — шоппинг и западные кафе; <strong>Sanlitun North Road</strong> — подборка кофеен.</li>
+                            <li><strong>Fangzhuanchang Hutong</strong> — хутун с лапшой и локальной едой (в отзывах — уровень «мишлен»).</li>
+                        </ul>
+                    </div>
+                </details>
 
-            <section class="guide-section" id="food-bj">
-                <h2 class="guide-section-title"><span>Еда и заведения · Пекин</span></h2>
-                <p class="guide-subtitle">Утка и «праздничный» ужин</p>
-                <ul class="guide-list">
-                    <li><strong>Duck de Chine, 1949 The Hidden City</strong> — атмосферный ресторан; ориентир чека на компанию ~750 ¥ на четверых (утка, пиво, чай, димсамы).</li>
-                    <li><strong>Siji Minfu</strong> — сеть; ветка <em>Financial Street</em> часто рекомендуют под утку.</li>
-                    <li><strong>Утка</strong> у зоны <strong>Qianmen</strong> (двухэтажное место у главного входа — ориентир из подборок).</li>
-                </ul>
-                <p class="guide-subtitle">Сети и бюджет</p>
-                <ul class="guide-list">
-                    <li><strong>Наньчэнсян 南城香</strong> — недорогой общепит, лапша и вонтоны с креветкой; много точек; пример адреса в центре: Dongcheng, улица Дунъаньмэнь, дом 18 (уточняйте павильон на карте).</li>
-                    <li><strong>Qingzhi Hushoushuang</strong> — сеть десертов с лапшой; точки на <strong>Qianmen Street 24</strong>, <strong>South Luogu Lane 42</strong>, <strong>Wudaoying 67</strong>, <strong>Xiang’er Alley</strong> и др.</li>
-                    <li><strong>China Grill</strong> — ресторан на высоком этаже с видом на город (проверяйте актуальный этаж/отель на карте).</li>
-                </ul>
-                <p class="guide-subtitle">Адрес из подборки (центр)</p>
-                <p class="guide-mono">277 Wangfujing Street, Haoyuan Building, Dongcheng (вход/этаж уточнять по карте) — китайская кухня на главной оси.</p>
-                <p class="guide-subtitle">Кофе и сладкое (подборки)</p>
-                <ul class="guide-list">
-                    <li><strong>Vitor</strong>, <strong>AMAM London Bakery Town</strong> — около Sanlitun / Taikoo Li.</li>
-                    <li><strong>JSG Churros</strong> — треугольник у Nanluoguxiang.</li>
-                    <li><strong>Starbucks</strong> — матча и pink drink; точка у <strong>Qianmen</strong>.</li>
-                    <li><strong>Genki Sushi</strong> — конвейер, улица Wangfujing.</li>
-                </ul>
-            </section>
+                <details class="guide-details" id="food-bj">
+                    <summary class="guide-details__summary">
+                        <span class="guide-details__label"><span>Еда и заведения</span></span>
+                        <span class="guide-details__chevron" aria-hidden="true">▼</span>
+                    </summary>
+                    <div class="guide-details__body">
+                        <p class="guide-subtitle">Утка и «праздничный» ужин</p>
+                        <ul class="guide-list">
+                            <li><strong>Duck de Chine, 1949 The Hidden City</strong> — атмосферный ресторан; ориентир чека на компанию ~750 ¥ на четверых (утка, пиво, чай, димсамы).</li>
+                            <li><strong>Siji Minfu</strong> — сеть; ветка <em>Financial Street</em> часто рекомендуют под утку.</li>
+                            <li><strong>Утка</strong> у зоны <strong>Qianmen</strong> (двухэтажное место у главного входа — ориентир из подборок).</li>
+                        </ul>
+                        <p class="guide-subtitle">Сети и бюджет</p>
+                        <ul class="guide-list">
+                            <li><strong>Наньчэнсян 南城香</strong> — недорогой общепит, лапша и вонтоны с креветкой; много точек в городе; пример адреса в центре: Dongcheng, улица Дунъаньмэнь, дом 18 (уточняйте павильон на карте).</li>
+                            <li><strong>Qingzhi Hushoushuang</strong> — сеть десертов с лапшой; в Пекине, например: <strong>Qianmen Street 24</strong>, <strong>South Luogu Lane 42</strong>, <strong>Wudaoying 67</strong>, <strong>Xiang’er Alley</strong>.</li>
+                            <li><strong>China Grill</strong> — ресторан на высоком этаже с видом на город (уточняйте этаж и отель на карте).</li>
+                            <li>Сети вроде <strong>Hai Di Lao</strong> (хот-пот) и другие — в Пекине тоже есть, смотрите район на карте.</li>
+                        </ul>
+                        <p class="guide-subtitle">Адрес из подборки (центр)</p>
+                        <p class="guide-mono">277 Wangfujing Street, Haoyuan Building, Dongcheng (вход/этаж уточнять по карте) — китайская кухня на главной оси.</p>
+                        <p class="guide-subtitle">Кофе и сладкое</p>
+                        <ul class="guide-list">
+                            <li><strong>Vitor</strong>, <strong>AMAM London Bakery Town</strong> — около Sanlitun / Taikoo Li.</li>
+                            <li><strong>JSG Churros</strong> — у Nanluoguxiang.</li>
+                            <li><strong>Starbucks</strong> — матча и pink drink; точка у <strong>Qianmen</strong>.</li>
+                            <li><strong>Genki Sushi</strong> — конвейер, улица Wangfujing.</li>
+                        </ul>
+                    </div>
+                </details>
 
-            <section class="guide-section" id="food-sh">
-                <h2 class="guide-section-title"><span>Еда и заведения · Шанхай</span></h2>
-                <ul class="guide-list">
-                    <li><strong>Solana / 蓝色港湾</strong> — зона с рестораном в космической тематике; аналогичная концепция встречается и в других ТЦ.</li>
-                    <li><strong>Tianxia Donwu 天下井饭</strong> — японская кухня, цоколь <strong>Fangyuanli ID Mall</strong>.</li>
-                    <li><strong>Warehouse No.3 Future Restaurant</strong> — шведский стол, <strong>Mosaic Mall</strong>, 6-й этаж.</li>
-                    <li><strong>Rainbobo</strong> — «вязаные» десерты; <strong>402 South Shaanxi Road</strong>, метро line 12, выходы 2 или 10.</li>
-                    <li><strong>Hai Di Lao</strong> — хот-пот, сеть.</li>
-                    <li><strong>喜家德</strong> — пельмени/дамплинги.</li>
-                    <li><strong>Gaga</strong>, <strong>Wagas</strong> — западный формат завтраков и салатов.</li>
-                </ul>
-                <p class="guide-p">На <strong>Nanjing Road</strong> популярны точки с мороженым в форме животных — как развлечение, не как must.</p>
-            </section>
+                <details class="guide-details" id="shopping">
+                    <summary class="guide-details__summary">
+                        <span class="guide-details__label"><span>Шоппинг и сервис</span></span>
+                        <span class="guide-details__chevron" aria-hidden="true">▼</span>
+                    </summary>
+                    <div class="guide-details__body">
+                        <ul class="guide-list">
+                            <li>Очки и аксессуары — отдельные бутики и ТЦ (Sanlitun, Wangfujing и др. — смотреть по району проживания).</li>
+                            <li>Для поездок с закупками и бизнесом заранее продумайте оплату и доставку крупных покупок.</li>
+                        </ul>
+                    </div>
+                </details>
 
-            <section class="guide-section" id="other-cities">
-                <h2 class="guide-section-title"><span>Другие города</span></h2>
-                <ul class="guide-list">
-                    <li><strong>Sushi Express</strong> — сеть суши в крупных городах Китая.</li>
-                    <li><strong>Гуанчжоу</strong> — отдельные бейкери и уличная еда (в исходных заметках — как «жизнь в городе»).</li>
-                    <li><strong>Аэропорт Daxing</strong> — гонконгское кафе в зоне вылета/транзита (как вариант еды в пути).</li>
-                </ul>
-            </section>
+                <details class="guide-details" id="tips">
+                    <summary class="guide-details__summary">
+                        <span class="guide-details__label"><span>Советы туристу</span></span>
+                        <span class="guide-details__chevron" aria-hidden="true">▼</span>
+                    </summary>
+                    <div class="guide-details__body">
+                        <ul class="guide-list">
+                            <li><strong>Метро</strong> быстрое и понятное; на улице — шум, пробки, яркие запахи у уличной еды (субъективно).</li>
+                            <li><strong>Чистота</strong> в городе обычно высокая.</li>
+                            <li><strong>Еда</strong> сильно отличается от привычной — оценки индивидуальны.</li>
+                            <li>Крупные достопримечательности требуют брони/слотов — закладывайте очереди.</li>
+                        </ul>
+                    </div>
+                </details>
 
-            <section class="guide-section" id="shopping">
-                <h2 class="guide-section-title"><span>Шоппинг и сервис</span></h2>
-                <ul class="guide-list">
-                    <li><strong>Шанхай</strong> — сильный бьюти-шоппинг; ориентир — зоны вокруг Nanjing Rd и крупные ТЦ.</li>
-                    <li><strong>Пекин</strong> — очки и аксессуары: отдельные бутики и ТЦ (смотреть по району проживания).</li>
-                    <li>Для поездок с закупками и бизнесом имеет смысл заранее продумать оплату, доставку и налоги на покупки.</li>
-                </ul>
-            </section>
-
-            <section class="guide-section" id="tips">
-                <h2 class="guide-section-title"><span>Советы туристу</span></h2>
-                <ul class="guide-list">
-                    <li><strong>Метро</strong> быстрое и понятное; на улице — шум, пробки, яркие запахи у уличной еды (субъективно).</li>
-                    <li><strong>Чистота</strong> в городе обычно высокая.</li>
-                    <li><strong>Еда</strong> сильно отличается от привычной — оценки «подходит / не подходит» индивидуальны.</li>
-                    <li>Крупные достопримечательности требуют брони/временных слотов — закладывайте очереди.</li>
-                </ul>
-            </section>
-
-            <section class="guide-section" id="study">
-                <h2 class="guide-section-title"><span>Учёба и виза-новости</span></h2>
-                <p class="guide-p">Для учёбы в Китае актуальны отдельные визовые и университетские правила — смотрите официальные источники и школу; в бытовых заметках это только контекст.</p>
-                <p class="guide-p">Изменения безвизового / упрощённого въезда для отдельных стран периодически обновляются — проверяйте консульство и IATA/посольство перед поездкой.</p>
-            </section>
+                <details class="guide-details" id="study">
+                    <summary class="guide-details__summary">
+                        <span class="guide-details__label"><span>Учёба и виза-новости</span></span>
+                        <span class="guide-details__chevron" aria-hidden="true">▼</span>
+                    </summary>
+                    <div class="guide-details__body">
+                        <p class="guide-p">Для учёбы в Китае актуальны отдельные визовые и университетские правила — смотрите официальные источники и школу.</p>
+                        <p class="guide-p">Изменения безвизового / упрощённого въезда периодически обновляются — проверяйте консульство и официальные объявления перед поездкой.</p>
+                    </div>
+                </details>
+            </div>
 
             <p class="guide-note">
-                Черновик MVP: без интерактива, без ссылок на исходные видео. Данные обезличены и обобщены; адреса и цены — ориентиры из открытых описаний, перед поездкой сверяйте на карте.
+                Черновик MVP: только Пекин; разделы открываются нажатием на заголовок. Без ссылок на исходные видео. Адреса и цены — ориентиры; перед поездкой сверяйте на карте.
             </p>
 
             <footer class="guide-footer footer">
@@ -185,7 +204,7 @@
                 </nav>
                 <div class="logo-badge">
                     <div class="logo-text">換算機</div>
-                    <div class="logo-subtitle">China memo</div>
+                    <div class="logo-subtitle">北京 memo</div>
                 </div>
             </footer>
         </article>
