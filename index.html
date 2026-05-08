@@ -3,20 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- v2026-04-04: CNY, hero row, Kinder 95₽ — обнови кэш: Cmd+Shift+R -->
+    <!-- v2026-05-08: TRY, hero row, Kinder 95₽ — обнови кэш: Cmd+Shift+R -->
     <meta http-equiv="Cache-Control" content="no-cache">
     <title>CONVERTER | Currency Exchange</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css?v=20260404d">
+    <link rel="stylesheet" href="css/style.css?v=20260508">
 </head>
 <body>
     <div class="container">
-        <!-- Chopsticks decoration -->
-        <div class="chopsticks">
-            <div class="chopstick"></div>
-            <div class="chopstick"></div>
+        <div class="turkey-ribbon" aria-hidden="true">
+            <span class="turkey-ribbon__r"></span>
+            <span class="turkey-ribbon__w"></span>
+            <span class="turkey-ribbon__r"></span>
         </div>
 
         <!-- Main converter card -->
@@ -26,7 +26,7 @@
                     <span class="title-main">CONVERTER</span>
                 </h1>
                 <p class="subtitle">Real-time currency exchange</p>
-                <p class="subtitle-jp">リアルタイム通貨換算</p>
+                <p class="subtitle-jp">Gerçek zamanlı kur</p>
             </header>
 
             <div class="divider">
@@ -67,13 +67,13 @@
                     <input type="number" class="currency-input" id="KZT" placeholder="0.00" step="0.01">
                 </div>
 
-                <!-- Chinese Yuan -->
-                <div class="currency-row" data-currency="CNY">
+                <!-- Turkish Lira -->
+                <div class="currency-row" data-currency="TRY">
                     <div class="currency-info">
-                        <span class="flag">🇨🇳</span>
-                        <span class="currency-code">CNY</span>
+                        <span class="flag">🇹🇷</span>
+                        <span class="currency-code">TRY</span>
                     </div>
-                    <input type="number" class="currency-input" id="CNY" placeholder="0.00" step="0.01">
+                    <input type="number" class="currency-input" id="TRY" placeholder="0.00" step="0.01">
                 </div>
 
                 <div class="total-divider"></div>
@@ -106,7 +106,7 @@
                                 <option value="RUB">RUB ₽</option>
                                 <option value="USD">USD $</option>
                                 <option value="KZT">KZT ₸</option>
-                                <option value="CNY">CNY ¥</option>
+                                <option value="TRY">TRY ₺</option>
                                 <option value="KINDER">Kinder Bueno</option>
                             </select>
                         </div>
@@ -125,9 +125,9 @@
                     <span class="update-icon">⟳</span>
                     <span id="updateTime">Загрузка курса...</span>
                 </div>
-                <p class="china-hint">В Китае курс может грузиться дольше — при сбое обновите страницу.</p>
-                <nav class="footer-guide-cta" aria-label="Гид по Пекину">
-                    <a href="guide.html">Перейти в гид →</a>
+                <p class="turkey-hint">Курс лиры иногда откликается с задержкой — при сбое обновите страницу.</p>
+                <nav class="footer-guide-cta" aria-label="Гид по Стамбулу">
+                    <a href="guide.html">Гид по Стамбулу →</a>
                 </nav>
                 
                 <div class="logo-badge">
@@ -138,6 +138,6 @@
         </div>
     </div>
 
-    <script src="js/script.js?v=20260404b"></script>
+    <script src="js/script.js?v=20260508"></script>
 </body>
 </html>

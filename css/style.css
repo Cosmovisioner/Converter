@@ -51,36 +51,30 @@ body {
     position: relative;
 }
 
-/* Chopsticks decoration */
-.chopsticks {
+/* Turkey ribbon — accent above the receipt card */
+.turkey-ribbon {
     position: absolute;
-    top: -20px;
+    top: -18px;
     left: 50%;
     transform: translateX(-50%);
-    width: 200px;
-    height: 60px;
+    width: 148px;
     z-index: 10;
-}
-
-.chopstick {
-    position: absolute;
-    width: 180px;
-    height: 8px;
-    background: linear-gradient(180deg, #2a2a2a 0%, #1a1a1a 50%, #3a3a3a 100%);
+    display: flex;
+    flex-direction: column;
     border-radius: 4px;
-    transform-origin: right center;
+    overflow: hidden;
+    border: 2px solid var(--black);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.22);
 }
 
-.chopstick:first-child {
-    top: 15px;
-    left: 10px;
-    transform: rotate(-8deg);
+.turkey-ribbon__r {
+    height: 6px;
+    background: #e30a17;
 }
 
-.chopstick:nth-child(2) {
-    top: 30px;
-    left: 10px;
-    transform: rotate(5deg);
+.turkey-ribbon__w {
+    height: 5px;
+    background: #ffffff;
 }
 
 /* Main Card - Receipt Style */
@@ -517,7 +511,7 @@ body {
     animation: none;
 }
 
-.china-hint {
+.turkey-hint {
     margin-top: 10px;
     font-size: 0.65rem;
     color: #888;
@@ -604,13 +598,8 @@ body {
         font-size: 1rem;
     }
     
-    .chopsticks {
-        width: 160px;
-    }
-    
-    .chopstick {
-        width: 150px;
-        height: 6px;
+    .turkey-ribbon {
+        width: 128px;
     }
 
     .hero-controls {

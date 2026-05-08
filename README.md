@@ -13,20 +13,21 @@ A real-time currency converter with a Japanese receipt-inspired design.
 
 - **Real-time exchange rates** — fetched from ExchangeRate API
 - **Instant conversion** — type in any field, others update automatically
-- **5 currencies** — RUB, USD, KZT, CNY (юань) + Kinder Bueno (1 шт. = 95 ₽)
+- **5 currencies** — RUB, USD, KZT, TRY (турецкая лира) + Kinder Bueno (1 шт. = 95 ₽)
 - **Hero row** — ввод суммы и выбор валюты одной строкой
-- **Два источника курса** — если первый недоступен (в т.ч. из Китая), подключается запасной CDN
+- **Два источника курса** — если первый недоступен, подключается запасной CDN
 - **"Random!" button** — generates random amounts for fun
 - **Auto-refresh** — rates update every 5 minutes
 - **Offline mode** — uses cached rates when offline
 - **Responsive design** — works on mobile and desktop
+- **Гид** — `guide.html` (Стамбул), в стиле основного конвертера
 
 ## Design
 
 - Japanese receipt/check style
 - Red grid background
 - Cream paper card
-- Chopsticks decoration
+- Turkish flag ribbon accent above the card
 - Bold typography
 
 ## Project Structure
@@ -34,8 +35,10 @@ A real-time currency converter with a Japanese receipt-inspired design.
 ```
 /Converter
 ├── index.html          # Main HTML page
+├── guide.html          # Istanbul travel guide (accordion)
 ├── css/
-│   └── style.css       # Styles and animations
+│   ├── style.css       # Styles and animations
+│   └── guide.css       # Guide page layout
 ├── js/
 │   └── script.js       # App logic and API calls
 ├── assets/             # Images and icons (future)

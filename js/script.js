@@ -1,10 +1,10 @@
 // ========================================
 // CURRENCY CONVERTER — real-time rates
-// CNY + Kinder Bueno (95 ₽) + hero input
+// TRY + Kinder Bueno (95 ₽) + hero input
 // ========================================
 
 const CONFIG = {
-    currencies: ['RUB', 'USD', 'KZT', 'CNY', 'KINDER'],
+    currencies: ['RUB', 'USD', 'KZT', 'TRY', 'KINDER'],
     updateInterval: 5 * 60 * 1000,
     kinderPriceRUB: 95,
     apiSources: [
@@ -105,7 +105,7 @@ async function fetchOpenErApi(signal) {
         USD: 1,
         RUB: data.rates.RUB,
         KZT: data.rates.KZT,
-        CNY: data.rates.CNY
+        TRY: data.rates.TRY
     });
 }
 
@@ -126,12 +126,12 @@ async function fetchJsdelivrCurrencyApi(signal) {
         USD: 1,
         RUB: upper.RUB,
         KZT: upper.KZT,
-        CNY: upper.CNY
+        TRY: upper.TRY
     });
 }
 
 function normalizeFromUsdRates(r) {
-    if (!r.RUB || !r.CNY || !r.KZT) {
+    if (!r.RUB || !r.TRY || !r.KZT) {
         throw new Error('missing currency in response');
     }
     r.KINDER = r.RUB / CONFIG.kinderPriceRUB;
@@ -178,9 +178,10 @@ async function fetchRates() {
 
         if (savedRates) {
             exchangeRates = JSON.parse(savedRates);
-            if (exchangeRates.JPY != null && exchangeRates.CNY == null) {
-                exchangeRates.CNY = exchangeRates.JPY;
+            if (exchangeRates.CNY != null && exchangeRates.TRY == null) {
+                exchangeRates.TRY = exchangeRates.CNY;
             }
+            delete exchangeRates.CNY;
             delete exchangeRates.JPY;
             if (exchangeRates.RUB) {
                 exchangeRates.KINDER = exchangeRates.RUB / CONFIG.kinderPriceRUB;
@@ -199,7 +200,7 @@ async function fetchRates() {
                 USD: 1,
                 RUB: 95,
                 KZT: 500,
-                CNY: 7.2,
+                TRY: 40,
                 KINDER: 95 / CONFIG.kinderPriceRUB
             };
             updateTimeEl.textContent = 'Курс примерный';
@@ -278,7 +279,7 @@ function formatNumber(number, currency) {
         return number.toFixed(2);
     }
 
-    if (currency === 'CNY' || currency === 'USD' || currency === 'RUB') {
+    if (currency === 'TRY' || currency === 'USD' || currency === 'RUB') {
         if (number >= 0.01) return number.toFixed(2);
     }
 
@@ -322,9 +323,12 @@ function loadSavedValues() {
         return;
     }
 
-    if (values.JPY != null && values.CNY == null) {
-        values.CNY = values.JPY;
-        delete values.JPY;
+    if (values.CNY != null && values.TRY == null) {
+        values.TRY = values.CNY;
+        delete values.CNY;
+    }
+    if (values.heroCurrency === 'CNY') {
+        values.heroCurrency = 'TRY';
     }
 
     if (values.heroAmount != null && values.heroCurrency) {

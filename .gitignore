@@ -20,6 +20,8 @@ build/
 
 # Local batch / downloads (not part of app)
 downloads_batch/
+!downloads_batch/urls.txt
+!downloads_batch/download_and_merge.sh
 
 # Environment variables
 .env
