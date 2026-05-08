@@ -13,7 +13,7 @@ A real-time currency converter with a Japanese receipt-inspired design.
 
 - **Real-time exchange rates** — fetched from ExchangeRate API
 - **Instant conversion** — type in any field, others update automatically
-- **5 currencies** — RUB, USD, KZT, TRY (турецкая лира) + Kinder Bueno (1 шт. = 95 ₽)
+- **5 currencies** — RUB, USD, AMD (армянский драм), TRY (турецкая лира) + Kinder Bueno (1 шт. = 95 ₽)
 - **Hero row** — ввод суммы и выбор валюты одной строкой
 - **Два источника курса** — если первый недоступен, подключается запасной CDN
 - **"Random!" button** — generates random amounts for fun

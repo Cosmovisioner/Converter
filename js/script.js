@@ -1,10 +1,10 @@
 // ========================================
 // CURRENCY CONVERTER — real-time rates
-// TRY + Kinder Bueno (95 ₽) + hero input
+// TRY, AMD + Kinder Bueno (95 ₽) + hero input
 // ========================================
 
 const CONFIG = {
-    currencies: ['RUB', 'USD', 'KZT', 'TRY', 'KINDER'],
+    currencies: ['RUB', 'USD', 'AMD', 'TRY', 'KINDER'],
     updateInterval: 5 * 60 * 1000,
     kinderPriceRUB: 95,
     apiSources: [
@@ -104,7 +104,7 @@ async function fetchOpenErApi(signal) {
     return normalizeFromUsdRates({
         USD: 1,
         RUB: data.rates.RUB,
-        KZT: data.rates.KZT,
+        AMD: data.rates.AMD,
         TRY: data.rates.TRY
     });
 }
@@ -125,13 +125,13 @@ async function fetchJsdelivrCurrencyApi(signal) {
     return normalizeFromUsdRates({
         USD: 1,
         RUB: upper.RUB,
-        KZT: upper.KZT,
+        AMD: upper.AMD,
         TRY: upper.TRY
     });
 }
 
 function normalizeFromUsdRates(r) {
-    if (!r.RUB || !r.TRY || !r.KZT) {
+    if (!r.RUB || !r.TRY || !r.AMD) {
         throw new Error('missing currency in response');
     }
     r.KINDER = r.RUB / CONFIG.kinderPriceRUB;
@@ -183,6 +183,10 @@ async function fetchRates() {
             }
             delete exchangeRates.CNY;
             delete exchangeRates.JPY;
+            if (exchangeRates.KZT != null && exchangeRates.AMD == null) {
+                exchangeRates.AMD = exchangeRates.KZT;
+            }
+            delete exchangeRates.KZT;
             if (exchangeRates.RUB) {
                 exchangeRates.KINDER = exchangeRates.RUB / CONFIG.kinderPriceRUB;
             }
@@ -199,7 +203,7 @@ async function fetchRates() {
             exchangeRates = {
                 USD: 1,
                 RUB: 95,
-                KZT: 500,
+                AMD: 385,
                 TRY: 40,
                 KINDER: 95 / CONFIG.kinderPriceRUB
             };
@@ -271,7 +275,7 @@ function convertFromCurrency(fromCurrency, amount) {
 }
 
 function formatNumber(number, currency) {
-    if (currency === 'KZT') {
+    if (currency === 'AMD') {
         if (number >= 1) return Math.round(number).toString();
     }
 
@@ -329,6 +333,13 @@ function loadSavedValues() {
     }
     if (values.heroCurrency === 'CNY') {
         values.heroCurrency = 'TRY';
+    }
+    if (values.KZT != null && values.AMD == null) {
+        values.AMD = values.KZT;
+        delete values.KZT;
+    }
+    if (values.heroCurrency === 'KZT') {
+        values.heroCurrency = 'AMD';
     }
 
     if (values.heroAmount != null && values.heroCurrency) {
